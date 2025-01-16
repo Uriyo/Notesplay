@@ -7,15 +7,10 @@ import { Editor } from '@/components/editor';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Download, Play } from 'lucide-react';
 import { NotebookPen } from 'lucide-react';
-
+import dynamic from 'next/dynamic';
 import html2pdf from 'html2pdf.js';
 
-declare global {
-  interface Window {
-    onYouTubeIframeAPIReady: () => void;
-    YT: any;
-  }
-}
+
 
 export default function Home() {
   const [videoUrl, setVideoUrl] = useState('');
@@ -41,37 +36,12 @@ export default function Home() {
   };
 
 
-  // const getCurrentTimestamp = () => {
-  //   if (playerRef.current) {
-  //     // @ts-ignore
-  //     const player = playerRef.current.contentWindow.player;
-  //     if (player?.getCurrentTime) {
-  //       setCurrentTime(Math.floor(player.getCurrentTime()));
-  //     }
-  //   }
-  // };
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
-
-  const insertTimestamp = () => {
-    //getCurrentTimestamp();
-    if (player?.getCurrentTime) {
-      const currentTime = Math.floor(player.getCurrentTime());
-      const timestamp = formatTime(currentTime);
-      const timestampHtml = `<p><strong>[${timestamp}]</strong> `;
-      setNotes(notes + timestampHtml);
-    }
-    //const timestamp = formatTime(currentTime);
-    //const timestampHtml = `<p><strong>[${timestamp}]</strong> `;
-    //setNotes(notes + timestampHtml);
-  };
-
-  const downloadNotes = () => {
-    const content = `
+  const downloadNotes = async () => {
+    const html2pdfModule = await import('html2pdf.js');
+    const html2pdf = html2pdfModule.default;
+    
+    const content = document.createElement("div");
+    content.innerHTML= `
       <h1 style="color: #000000;">Video Notes</h1>
       <p style="color: #000000;"><strong>Video URL:</strong><a href="https://youtube.com/watch?v=${videoId}" style="color: #000000;">https://youtube.com/watch?v=${videoId}</a> </p>
       <div class="notes-content" style="color: #000000;">

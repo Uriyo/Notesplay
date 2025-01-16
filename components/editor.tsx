@@ -34,7 +34,9 @@ import {
 export function Editor({ onUpdate }: { onUpdate?: (html: string) => void }) {
   const [aiLoading, setAiLoading] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
+  const [imageURL, setImageURL] = useState('');
   const [showLinkInput, setShowLinkInput] = useState(false);
+  const [showImageInput, setShowImageInput] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -72,6 +74,13 @@ export function Editor({ onUpdate }: { onUpdate?: (html: string) => void }) {
       editor.chain().focus().setImage({ src: url }).run();
     }
   };
+  // const addImage = () => {
+  //   if (imageURL && editor) {
+  //     editor.chain().focus().setImage({ src: imageURL }).run();
+  //     setImageURL('');
+  //     setShowImageInput(false);
+  //   }
+  // };
 
   const addLink = () => {
     if (!editor) return;
@@ -252,3 +261,7 @@ export function Editor({ onUpdate }: { onUpdate?: (html: string) => void }) {
     </div>
   );
 }
+
+
+
+
