@@ -1,7 +1,8 @@
-# Notes Play
+# NotesPlay 
 
+[🔗Live Link](https://notesplay-cve5.vercel.app/)
 
-A simple and efficient notes application built with **Next.js**. Notes Play allows users to create, edit, and manage their notes seamlessly with a modern, responsive user interface.
+A simple and efficient notes application built with **Next.js**. NotesPlay allows users to create, edit, and manage their notes with GenAI suggestion seamlessly with a modern, responsive user interface.
 
 ![Notes Play](https://res.cloudinary.com/doyqpfgiq/image/upload/v1737055034/folioassets/notesplay2_sl0hij.png)
 
